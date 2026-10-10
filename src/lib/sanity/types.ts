@@ -33,9 +33,13 @@ export type Workout = {
   duration?: number;
   exercises?: Array<{
     exercise?: ExerciseReference;
-    reps?: number;
-    weight?: number;
-    weightUnit?: "lbs" | "kg";
+    sets?: Array<{
+      reps?: number;
+      weight?: number;
+      weightUnit?: "lbs" | "kg";
+      _type: "workoutSet";
+      _key: string;
+    }>;
     _type: "workoutExercise";
     _key: string;
   }>;
@@ -227,7 +231,7 @@ export type ExercisesQueryResult = Array<{
   isActive?: boolean;
 }>;
 
-// Source: ../src/app/(app)/(tabs)/history.tsx
+// Source: ../src/app/(app)/(tabs)/history/index.tsx
 // Variable: getWorkoutQuery
 // Query: *[_type == "workout" && userId == $userId] | order(date desc){  _id,  date,  duration,  exercises[]{    exercise-> {      _id,      name    },    sets[]{      reps,      weight,      weightUnit,      _type,      _key    },    _type,    _key  }}
 export type GetWorkoutQueryResult = Array<{
@@ -239,11 +243,41 @@ export type GetWorkoutQueryResult = Array<{
       _id: string;
       name: string | null;
     } | null;
-    sets: null;
+    sets: Array<{
+      reps: number | null;
+      weight: number | null;
+      weightUnit: "kg" | "lbs" | null;
+      _type: "workoutSet";
+      _key: string;
+    }> | null;
     _type: "workoutExercise";
     _key: string;
   }> | null;
 }>;
+
+// Source: ../src/app/(app)/(tabs)/history/workout-record.tsx
+// Variable: getworkoutRecordQuery
+// Query: *[_type == "workout" && _id == $workoutId][0]{       _id,  date,  duration,  exercises[]{    exercise-> {      _id,      name    },    sets[]{      reps,      weight,      weightUnit,      _type,      _key    },    _type,    _key  }    }
+export type GetworkoutRecordQueryResult = {
+  _id: string;
+  date: string | null;
+  duration: number | null;
+  exercises: Array<{
+    exercise: {
+      _id: string;
+      name: string | null;
+    } | null;
+    sets: Array<{
+      reps: number | null;
+      weight: number | null;
+      weightUnit: "kg" | "lbs" | null;
+      _type: "workoutSet";
+      _key: string;
+    }> | null;
+    _type: "workoutExercise";
+    _key: string;
+  }> | null;
+} | null;
 
 // Source: ../src/app/(app)/exercise-detail.tsx
 // Variable: singleExerciseQuery
@@ -273,6 +307,7 @@ declare global {
   interface SanityQueries {
     '*[_type == "exercise"] {\n  ...\n}': ExercisesQueryResult;
     '*[_type == "workout" && userId == $userId] | order(date desc){\n  _id,\n  date,\n  duration,\n  exercises[]{\n    exercise-> {\n      _id,\n      name\n    },\n    sets[]{\n      reps,\n      weight,\n      weightUnit,\n      _type,\n      _key\n    },\n    _type,\n    _key\n  }\n}': GetWorkoutQueryResult;
+    '\n    *[_type == "workout" && _id == $workoutId][0]{\n       _id,\n  date,\n  duration,\n  exercises[]{\n    exercise-> {\n      _id,\n      name\n    },\n    sets[]{\n      reps,\n      weight,\n      weightUnit,\n      _type,\n      _key\n    },\n    _type,\n    _key\n  }\n    }\n    \n    ': GetworkoutRecordQueryResult;
     '*[_type == "exercise" && _id == $id][0]': SingleExerciseQueryResult;
   }
 }

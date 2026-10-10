@@ -100,34 +100,64 @@
                 },
                 "optional": true
               },
-              "reps": {
+              "sets": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "number"
-                },
-                "optional": true
-              },
-              "weight": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "number"
-                },
-                "optional": true
-              },
-              "weightUnit": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "union",
-                  "of": [
-                    {
-                      "type": "string",
-                      "value": "lbs"
+                  "type": "array",
+                  "of": {
+                    "type": "object",
+                    "attributes": {
+                      "reps": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "number"
+                        },
+                        "optional": true
+                      },
+                      "weight": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "number"
+                        },
+                        "optional": true
+                      },
+                      "weightUnit": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "union",
+                          "of": [
+                            {
+                              "type": "string",
+                              "value": "lbs"
+                            },
+                            {
+                              "type": "string",
+                              "value": "kg"
+                            }
+                          ]
+                        },
+                        "optional": true
+                      },
+                      "_type": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string",
+                          "value": "workoutSet"
+                        }
+                      }
                     },
-                    {
-                      "type": "string",
-                      "value": "kg"
+                    "rest": {
+                      "type": "object",
+                      "attributes": {
+                        "_key": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
                     }
-                  ]
+                  }
                 },
                 "optional": true
               },

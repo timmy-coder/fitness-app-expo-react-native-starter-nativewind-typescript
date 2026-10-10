@@ -42,29 +42,44 @@ export default defineType({
 							validation: (Rule) => Rule.required(),
 						}),
 						defineField({
-							name: 'reps',
-							title: 'Reps',
-							type: 'number',
-							validation: (Rule) => Rule.required().integer().min(0),
-						}),
-						defineField({
-							name: 'weight',
-							title: 'Weight',
-							type: 'number',
-							validation: (Rule) => Rule.required().min(0),
-						}),
-						defineField({
-							name: 'weightUnit',
-							title: 'Weight Unit',
-							type: 'string',
-							options: {
-								list: [
-									{title: 'Pounds (lbs)', value: 'lbs'},
-									{title: 'Kilograms (kg)', value: 'kg'},
-								],
-								layout: 'radio',
-							},
-							validation: (Rule) => Rule.required(),
+							name: 'sets',
+							title: 'Sets',
+							type: 'array',
+							of: [
+								{
+									type: 'object',
+									name: 'workoutSet',
+									title: 'Set',
+									fields: [
+										defineField({
+											name: 'reps',
+											title: 'Reps',
+											type: 'number',
+											validation: (Rule) => Rule.required().integer().min(0),
+										}),
+										defineField({
+											name: 'weight',
+											title: 'Weight',
+											type: 'number',
+											validation: (Rule) => Rule.required().min(0),
+										}),
+										defineField({
+											name: 'weightUnit',
+											title: 'Weight Unit',
+											type: 'string',
+											options: {
+												list: [
+													{title: 'Pounds (lbs)', value: 'lbs'},
+													{title: 'Kilograms (kg)', value: 'kg'},
+												],
+												layout: 'radio',
+											},
+											validation: (Rule) => Rule.required(),
+										}),
+									],
+								},
+							],
+							validation: (Rule) => Rule.required().min(1),
 						}),
 					],
 					preview: {

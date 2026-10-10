@@ -8,7 +8,7 @@ export const config = {
     projectId: "88jzromg",
     dataset: "production",
    apiVersion: '2025-05-30',
-    useCdn: true,
+    useCdn: false,
     // token: process.env.SANITY_API_TOKEN,
     stega: {
          enabled: !!isWeb,
@@ -23,6 +23,7 @@ const adminConfig = {
     ...config,
     token: process.env.SANITY_API_TOKEN,
 }
+export const adminClient = createClient(adminConfig);
 
 // Image URL builder
 const builder = createImageUrlBuilder(config);
