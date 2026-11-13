@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Alert, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 
+
+// Completed the profile section
 export default function Profile() {
 
 const {signOut} = useAuth();
