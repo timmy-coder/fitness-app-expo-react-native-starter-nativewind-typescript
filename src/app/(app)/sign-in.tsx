@@ -42,6 +42,7 @@ export default function SignIn() {
       // See https://clerk.com/docs/guides/development/custom-flows/error-handling
 
       // This is the signup flow 
+      //Add sign up api for fitness flow
       return;
     }
 
