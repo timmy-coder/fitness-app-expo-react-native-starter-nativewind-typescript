@@ -40,6 +40,8 @@ export default function SignIn() {
     if (error) {
       // Handle the error in your app.
       // See https://clerk.com/docs/guides/development/custom-flows/error-handling
+
+      // This is the signup flow 
       return;
     }
 
