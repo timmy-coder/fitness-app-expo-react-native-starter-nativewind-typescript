@@ -5,6 +5,9 @@ import { Alert, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 
 
 // Completed the profile section
+// Completed the profile section
+// Completed the profile section
+// Completed the profile section
 export default function Profile() {
 
 const {signOut} = useAuth();
